@@ -19,4 +19,17 @@ document.addEventListener("click",e=>{const nav=e.target.closest("[data-view]");
 document.addEventListener("change",e=>{if(e.target.matches("[data-task]")){const task=state.tasks.find(t=>t.id===e.target.dataset.task);if(task)task.done=e.target.checked;save();render()}});
 $("#list-form").addEventListener("submit",e=>{if(e.submitter?.value==="cancel"){e.preventDefault();$("#list-dialog").close();return}e.preventDefault();const name=$("#list-name").value.trim();if(!name)return;const created={id:crypto.randomUUID(),name,category:$("#list-category").value};state.lists.push(created);save();$("#list-dialog").close();currentView="lists";render();setTimeout(()=>sendListToNotes(created.id),250)});
 $("#task-form").addEventListener("submit",e=>{if(e.submitter?.value==="cancel"){e.preventDefault();$("#task-dialog").close();return}e.preventDefault();const title=$("#task-name").value.trim();if(!title)return;state.tasks.push({id:crypto.randomUUID(),title,listId:$("#task-list").value,done:false});save();$("#task-dialog").close();currentView="tasks";render()});
-if("serviceWorker"in navigator&&location.protocol!=="file:")window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));render();
+if("serviceWorker"in navigator&&location.protocol!=="file:"){
+  let refreshing=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{
+    if(refreshing)return;
+    refreshing=true;
+    location.reload();
+  });
+  window.addEventListener("load",()=>{
+    navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"})
+      .then(registration=>registration.update())
+      .catch(()=>{});
+  });
+}
+render();
