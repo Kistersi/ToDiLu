@@ -1,11 +1,11 @@
-const APP_VERSION="0.3.3";
+const APP_VERSION="0.3.4";
 const STORE="tudilo-v1";let state=load();let currentView="home";
 const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
 function load(){try{return JSON.parse(localStorage.getItem(STORE))||seed()}catch{return seed()}}
 function seed(){return {lists:[],tasks:[],notes:[],syncCompleted:false}}
 function save(){localStorage.setItem(STORE,JSON.stringify(state))}
-function shortcutSetupMarkup(){return state.shortcutReady?"":'<section class="setup-card"><div><strong>Apple-Kurzbefehle verbinden</strong><p>Richte den Kurzbefehl einmalig ein, damit Tudilo deine markierten Notizen synchronisieren kann.</p></div><button class="primary" data-action="open-shortcut-guide">Einrichtung anzeigen</button></section>'}
+function shortcutSetupMarkup(){return '<section class="setup-card"><div><strong>Apple-Kurzbefehle verbinden</strong><p>Richte den Kurzbefehl einmalig ein, damit Tudilo deine markierten Notizen synchronisieren kann.</p></div><button class="primary" data-action="open-shortcut-guide">Einrichtung anzeigen</button></section>'}
 const shortcutSteps=[
 "1. Öffne Apples App „Kurzbefehle“ und erstelle einen neuen Kurzbefehl. Name: Tudilo Notizen Sync.",
 "2. Füge die Aktion „Notizen suchen“ hinzu. Stelle den Filter so ein: Name enthält [todilo]. Aktiviere bei Bedarf „Alle Notizen“ statt einer begrenzten Auswahl.",
