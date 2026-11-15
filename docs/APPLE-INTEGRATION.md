@@ -17,3 +17,8 @@ Tudilo filtert die Rückgabe selbst und übernimmt ausschließlich Einträge mit
 
 ## Wichtige Grenze
 Eine iOS-PWA kann Apple Notizen nicht selbstständig auslesen. Der Kurzbefehl ist zwingend erforderlich. Die PWA kann den Kurzbefehl starten und die strukturierte Rückgabe entgegennehmen; der eigentliche Kurzbefehl ist noch nicht automatisch auf dem iPhone installiert. Die Verfügbarkeit von Checklistenpunkten in Kurzbefehle muss auf dem Gerät geprüft werden. Bidirektionaler Abgleich und Konfliktauflösung sind noch nicht implementiert.
+
+
+## Erkennung der Kurzbefehl-Einrichtung
+
+iOS stellt einer PWA keine API bereit, mit der sie die installierten Kurzbefehle abfragen kann. Tudilo zeigt deshalb bis zu einer erfolgreichen Rückmeldung einen Einrichtungshinweis. Nach erfolgreicher Einrichtung muss der Kurzbefehl Tudilo mit `?tudilo_shortcut=ready` zurücköffnen. Dadurch wird die Einrichtung auf diesem Gerät als bestätigt gespeichert. Wird der Kurzbefehl später gelöscht, kann die PWA das nicht selbst erkennen; der Nutzer kann die Verbindung erneut testen bzw. zurücksetzen.
