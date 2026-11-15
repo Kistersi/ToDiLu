@@ -7,7 +7,7 @@
   <meta name="description" content="Tudilo – Your day. Your buddy.">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=0.3.6">
+  <link rel="stylesheet" href="./styles.css?v=0.3.7">
   <title>Tudilo – Your day. Your buddy.</title>
 </head>
 <body>
@@ -28,7 +28,7 @@
         <button class="avatar-button" aria-label="Tudilo Buddy">☺</button>
       </header>
       <section id="view" aria-live="polite"></section>
-      <footer>Ein Schritt nach dem anderen. <span>♡ Tudilo · <strong id="version-label">Version 0.3.6</strong></span></footer>
+      <footer>Ein Schritt nach dem anderen. <span>♡ Tudilo · <strong id="version-label">Version 0.3.7</strong></span></footer>
     </main>
   </div>
   <nav class="mobile-nav" aria-label="Mobile Navigation">
@@ -45,6 +45,14 @@
       <button class="primary full" type="submit">Liste erstellen</button>
     </form>
   </dialog>
+  <dialog id="note-import-dialog">
+    <form method="dialog" id="note-import-form">
+      <div class="dialog-head"><div><span class="eyebrow">APPLE NOTIZEN</span><h2>Notiz übernehmen</h2></div><button class="icon-button" value="cancel" aria-label="Schließen">×</button></div>
+      <p class="subhead">Öffne die Apple-Notiz, kopiere Titel und Listenpunkte und füge alles hier ein.</p>
+      <textarea id="note-import-text" rows="9" placeholder="[todilo] [einkauf] Einkaufen&#10;Gemüse&#10;Kerzen" required></textarea>
+      <button class="primary full" type="submit">In Tudilo übernehmen</button>
+    </form>
+  </dialog>
   <dialog id="task-dialog">
     <form method="dialog" id="task-form">
       <div class="dialog-head"><div><span class="eyebrow">KLEINER SCHRITT</span><h2>Neue Aufgabe</h2></div><button class="icon-button" value="cancel" aria-label="Schließen">×</button></div>
@@ -53,6 +61,6 @@
       <button class="primary full" type="submit">Aufgabe hinzufügen</button>
     </form>
   </dialog>
-  <script src="./app.js?v=0.3.6"></script>
+  <script src="./app.js?v=0.3.7"></script>
 </body>
 </html>
