@@ -1,4 +1,4 @@
-const APP_VERSION="0.3.5";
+const APP_VERSION="0.3.6";
 const STORE="tudilo-v1";let state=load();let currentView="home";
 const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -53,7 +53,7 @@ if("serviceWorker"in navigator&&location.protocol!=="file:"){
     if (swRegistration) swRegistration.update().catch(()=>{});
   };
   window.addEventListener("load",()=>{
-    navigator.serviceWorker.register("./sw.js?v=0.3.5",{updateViaCache:"none"})
+    navigator.serviceWorker.register("./sw.js?v=0.3.6",{updateViaCache:"none"})
       .then(registration=>{swRegistration=registration;registration.update().catch(()=>{});})
       .catch(()=>{});
   });
