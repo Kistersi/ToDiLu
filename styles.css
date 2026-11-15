@@ -17,3 +17,5 @@
 .guide-step button{flex:none;font-size:11px;padding:9px 11px}
 .guide-note{padding:12px;background:#f1f3ee;border-radius:11px}
 @media(max-width:560px){.setup-card{align-items:stretch;flex-direction:column}.setup-card button{width:100%}.guide-step{align-items:stretch;flex-direction:column}.guide-step button{width:100%}}
+
+.guide-doc-link{display:inline-block;color:#526b5b;font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px;margin-top:4px}
