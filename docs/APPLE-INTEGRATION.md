@@ -31,3 +31,19 @@ Für die spätere Umsetzung erforderlich:
 ## Kalender
 
 Die Kalenderanbindung ist ebenfalls offen. Ein PWA-Prototyp kann Kalenderdateien (ICS) exportieren bzw. Kalender-Weblinks anbieten; eine zuverlässige native Zwei-Wege-Synchronisation braucht einen gesonderten iOS-Workflow oder eine native App.
+
+
+## Erster Übergabe-Prototyp (Shortcuts)
+
+Die PWA kann jetzt beim Anlegen einer Liste den iOS-Kurzbefehl **Tudilo Sync** aufrufen und eine JSON-Nutzlast übergeben. Bestehende Listen haben zusätzlich die Aktion **An Apple Notizen senden**. Das ist eine explizite Übergabe – keine stille Hintergrundsynchronisierung.
+
+### Kurzbefehl einmalig auf dem iPhone anlegen
+
+1. Öffne Apples App **Kurzbefehle** und erstelle einen Kurzbefehl mit dem Namen exakt `Tudilo Sync`.
+2. Füge die Aktion **Eingabe aus Kurzbefehl abrufen** bzw. die Eingabe des Kurzbefehls hinzu.
+3. Füge **Text aus Eingabe abrufen** hinzu, falls die Eingabe als Text vorliegt.
+4. Füge **Wörterbuch aus Eingabe abrufen** hinzu, um die JSON-Daten zu lesen.
+5. Erstelle den Notiztext mit dem Titel `[todilo] [KATEGORIE] LISTENNAME` und den übergebenen Aufgaben als Checklisten-Zeilen.
+6. Füge die Aktion **Neue Notiz erstellen** hinzu und aktiviere bei Bedarf die Rückfrage vor dem Erstellen.
+
+Die Übergabe enthält `id`, `title`, `category` und `items` mit Aufgaben-IDs, Titeln und Erledigt-Status. Ein wiederholtes Ausführen kann in dieser ersten Stufe noch eine weitere Notiz erzeugen. Bitte deshalb zunächst mit einer Testliste arbeiten. Das automatische Finden und Aktualisieren derselben Notiz sowie die Rücksynchronisierung werden erst nach erfolgreichem PoC ergänzt.
