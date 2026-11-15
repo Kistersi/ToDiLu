@@ -22,3 +22,7 @@ Eine iOS-PWA kann Apple Notizen nicht selbstständig auslesen. Der Kurzbefehl is
 ## Erkennung der Kurzbefehl-Einrichtung
 
 iOS stellt einer PWA keine API bereit, mit der sie die installierten Kurzbefehle abfragen kann. Tudilo zeigt deshalb bis zu einer erfolgreichen Rückmeldung einen Einrichtungshinweis. Nach erfolgreicher Einrichtung muss der Kurzbefehl Tudilo mit `?tudilo_shortcut=ready` zurücköffnen. Dadurch wird die Einrichtung auf diesem Gerät als bestätigt gespeichert. Wird der Kurzbefehl später gelöscht, kann die PWA das nicht selbst erkennen; der Nutzer kann die Verbindung erneut testen bzw. zurücksetzen.
+
+
+## Installation in Tudilo
+Der Button **Kurzbefehl hinzufügen** öffnet aktuell die Kurzbefehle-App und weist darauf hin, dass der echte Apple-iCloud-Importlink noch hinterlegt werden muss. Eine automatische Installation ist erst möglich, wenn ein tatsächlich veröffentlichter iCloud-Kurzbefehl-Link existiert. Die App darf keinen solchen Link vortäuschen.
