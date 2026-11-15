@@ -1,6 +1,6 @@
 # Tudilo – Apple-Kurzbefehl einrichten
 
-Diese Anleitung beschreibt den manuellen Aufbau des Apple-Kurzbefehls **Tudilo Notizen Sync**. Er liest Apple-Notizen mit dem Kennzeichen `[todilo]` aus und übergibt die gefundenen Listen an Tudilo.
+Diese Anleitung bereitet den Apple-Kurzbefehl **Tudilo Notizen Sync** für die spätere iCloud-Freigabe vor. Ziel ist: markierte Apple-Notizen finden, ihre Inhalte als Daten an Tudilo zurückgeben und den Kurzbefehl danach über einen iCloud-Link mit anderen Tudilo-Installationen teilen.
 
 > **Wichtig:** Diese Datei ist eine Aufbauanleitung, keine installierbare Kurzbefehle-Datei. Apple veröffentlicht einen installierbaren Kurzbefehl erst, wenn er in der Kurzbefehle-App erstellt und über iCloud geteilt wurde. Die konkrete Verarbeitung von Apple-Notiz-Checklisten muss auf dem Zielgerät getestet werden.
 
@@ -29,7 +29,9 @@ Unterstützte Kategorien: `privat`, `arbeit`, `einkauf`, `wochenende`, `ideen`. 
 
 ## 3. Daten aus den Notizen aufbereiten
 
-Der Kurzbefehl muss die gefundenen Notizen in eine JSON-Liste umwandeln. Für jede Notiz wird ein Wörterbuch mit diesen Feldern benötigt:
+Füge nach „Notizen suchen“ eine Aktion „Mit jedem wiederholen“ ein. Innerhalb der Wiederholung muss der Kurzbefehl mindestens den Notiznamen und den Notizinhalt auslesen. Verwende dazu „Details von Notizen abrufen“ (Detail: Name und Text/Body, soweit deine iOS-Version diese Details anbietet).
+
+Die Rückgabe an Tudilo ist eine JSON-Liste. Für jede Notiz wird ein Wörterbuch mit diesen Feldern benötigt:
 
 | Feld | Bedeutung |
 | --- | --- |
@@ -61,11 +63,15 @@ Beispiel für die erwartete Rückgabe:
 ]
 ```
 
-Baue die Daten in Kurzbefehle mit den Aktionen zum Wiederholen der gefundenen Notizen und zum Erstellen von Wörterbüchern auf. Die Bezeichnungen und Möglichkeiten der Aktionen können sich je nach iOS-Version unterscheiden. Entscheidend ist, dass am Ende ein gültiger JSON-Text im oben gezeigten Format entsteht.
+Erstelle pro gefundener Notiz ein Wörterbuch mit `title`, `marker`, `category` und `items`. Sammle diese Wörterbücher in einer Liste. Wandle die Liste mit der Aktion „JSON erstellen“ bzw. „In JSON konvertieren“ in JSON-Text um. Die genauen Aktionsnamen können je nach iOS-Version abweichen.
+
+**Wichtiger Testpunkt:** Apple-Notizen stellt Checklistenpunkte und deren Erledigt-Status nicht auf allen iOS-Versionen als getrennte, strukturierte Daten für Kurzbefehle bereit. Prüfe deshalb zuerst mit einer Testnotiz, ob Name, einzelne Punkte und deren Status tatsächlich getrennt ausgelesen werden können. Wenn deine Kurzbefehle-App nur den gesamten Notiztext liefert, kann dieser nicht zuverlässig als Liste einzelner Aufgaben mit Erledigt-Status interpretiert werden. In diesem Fall bitte nicht einfach fortfahren: Dann müssen wir die Datenübergabe anpassen, statt eine falsche Synchronisierung zu veröffentlichen.
 
 **Hinweis zu Checklisten:** Apple-Notizen-Checklisten werden von Kurzbefehle nicht auf jeder iOS-Version gleich als strukturierte Aufgaben angeboten. Wenn die Punkte nicht einzeln auslesbar sind, ist die Synchronisierung der Aufgaben noch nicht möglich. Nicht einfach den gesamten Notiztext als einen erledigbaren Punkt importieren, ohne das ausdrücklich zu wollen.
 
 ## 4. JSON an Tudilo zurückgeben
+
+Verwende nach der JSON-Erstellung die Aktion „URL-kodieren“ (falls vorhanden) für den JSON-Text. Erstelle danach die Ziel-URL und öffne sie mit „URLs öffnen“.
 
 1. Erzeuge aus dem Wörterbuch-Array einen JSON-Text.
 2. Übergib diesen Text URL-kodiert im Parameter `tudilo_sync`.
@@ -88,7 +94,18 @@ Ersetze den Platzhalter durch den tatsächlich URL-kodierten JSON-Text. Die spit
 
 Tudilo akzeptiert nur Einträge mit `marker: "[todilo]"` oder dem Kennzeichen `[todilo]` im Titel. Andere Notizen werden ignoriert.
 
-## 6. Kurzbefehl in Tudilo starten
+## 6. iCloud-Link erstellen und in Tudilo hinterlegen
+
+Wenn der Kurzbefehl auf deinem iPhone korrekt getestet wurde:
+
+1. Öffne in Kurzbefehle das Menü des Kurzbefehls **Tudilo Notizen Sync**.
+2. Wähle „Teilen“ und anschließend „iCloud-Link kopieren“ bzw. die entsprechende Teilen-Option.
+3. Sende den erzeugten iCloud-Link hier in den Chat.
+4. Der Link kann dann als Ziel für den Button „Kurzbefehl hinzufügen“ in Tudilo hinterlegt werden.
+
+Der Link wird erst durch Apple erzeugt, wenn du den Kurzbefehl aus deiner Kurzbefehle-App teilst.
+
+## 7. Kurzbefehl in Tudilo starten
 
 Nach erfolgreicher Einrichtung kann der Button **Listen synchronisieren** den Kurzbefehl über dessen Namen starten. Die PWA kann nicht selbst feststellen, ob ein Kurzbefehl installiert ist oder später gelöscht wurde.
 
