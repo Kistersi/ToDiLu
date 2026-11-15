@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#253442">
+  <meta name="description" content="Tudilo – Your day. Your buddy.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Tudilo – Your day. Your buddy.</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Tudilo Startseite"><span class="buddy-mark">t<span>•</span></span><span>Tudilo<small>Your day. Your buddy.</small></span></a>
+      <nav id="side-nav" aria-label="Hauptnavigation">
+        <button class="nav-item active" data-view="home">⌂ <span>Übersicht</span></button>
+        <button class="nav-item" data-view="tasks">☑ <span>Aufgaben</span></button>
+        <button class="nav-item" data-view="lists">▤ <span>Meine Listen</span></button>
+        <button class="nav-item" data-view="notes">▧ <span>Notizen</span></button>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Alles lokal gespeichert</div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow" id="today-label">DEIN TAG</div><h1 id="page-title">Schön, dass du da bist.</h1></div>
+        <button class="avatar-button" aria-label="Tudilo Buddy">☺</button>
+      </header>
+      <section id="view" aria-live="polite"></section>
+      <footer>Ein Schritt nach dem anderen. <span>♡ Tudilo</span></footer>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile Navigation">
+    <button class="nav-item active" data-view="home">⌂<small>Heute</small></button>
+    <button class="nav-item" data-view="tasks">☑<small>Aufgaben</small></button>
+    <button class="nav-item" data-view="lists">▤<small>Listen</small></button>
+    <button class="nav-item" data-view="notes">▧<small>Notizen</small></button>
+  </nav>
+  <dialog id="list-dialog">
+    <form method="dialog" id="list-form">
+      <div class="dialog-head"><div><span class="eyebrow">NEU ORGANISIEREN</span><h2>Eine neue Liste</h2></div><button class="icon-button" value="cancel" aria-label="Schließen">×</button></div>
+      <label for="list-name">Wie soll sie heißen?</label><input id="list-name" maxlength="50" placeholder="z. B. Wochenende" required>
+      <label for="list-category">Kategorie</label><select id="list-category"><option value="privat">Privat</option><option value="arbeit">Arbeit</option><option value="einkauf">Einkauf</option><option value="wochenende">Wochenende</option><option value="ideen">Ideen</option></select>
+      <button class="primary full" type="submit">Liste erstellen</button>
+    </form>
+  </dialog>
+  <dialog id="task-dialog">
+    <form method="dialog" id="task-form">
+      <div class="dialog-head"><div><span class="eyebrow">KLEINER SCHRITT</span><h2>Neue Aufgabe</h2></div><button class="icon-button" value="cancel" aria-label="Schließen">×</button></div>
+      <label for="task-name">Was möchtest du erledigen?</label><input id="task-name" maxlength="100" placeholder="Aufgabe eingeben" required>
+      <label for="task-list">Zu welcher Liste gehört sie?</label><select id="task-list"></select>
+      <button class="primary full" type="submit">Aufgabe hinzufügen</button>
+    </form>
+  </dialog>
+  <script src="./app.js"></script>
+</body>
+</html>
